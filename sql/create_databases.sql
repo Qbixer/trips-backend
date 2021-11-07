@@ -1,0 +1,1 @@
+CREATE DATABASE trips WITH OWNER = postgres;
