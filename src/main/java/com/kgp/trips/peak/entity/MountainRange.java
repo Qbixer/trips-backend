@@ -11,7 +11,7 @@ public class MountainRange {
 
     @Id
     @GeneratedValue(generator = "mountain_range_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;

@@ -11,7 +11,7 @@ public class Attraction {
 
     @Id
     @GeneratedValue(generator = "attraction_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;

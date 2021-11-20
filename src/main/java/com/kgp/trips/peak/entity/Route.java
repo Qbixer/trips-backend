@@ -11,7 +11,7 @@ public class Route {
 
     @Id
     @GeneratedValue(generator = "route_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;

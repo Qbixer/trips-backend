@@ -13,7 +13,7 @@ public class Point {
 
     @Id
     @GeneratedValue(generator = "point_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;

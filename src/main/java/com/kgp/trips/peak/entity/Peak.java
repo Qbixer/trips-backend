@@ -11,7 +11,7 @@ public class Peak {
 
     @Id
     @GeneratedValue(generator = "peak_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;

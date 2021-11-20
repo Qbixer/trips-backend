@@ -11,7 +11,7 @@ public class Region {
 
     @Id
     @GeneratedValue(generator = "region_id_seq")
-    Long id;
+    Integer id;
 
     @Column
     String name;
