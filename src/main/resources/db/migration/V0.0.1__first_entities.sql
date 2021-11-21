@@ -1,10 +1,3 @@
-create sequence attraction_id_seq;
-create sequence mountain_range_id_seq;
-create sequence peak_id_seq;
-create sequence point_id_seq;
-create sequence region_id_seq;
-create sequence route_id_seq;
-
 create table region
 (
     id serial not null
