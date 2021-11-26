@@ -1,5 +1,6 @@
 package com.kgp.trips.peak.dto;
 
+import com.kgp.trips.peak.entity.Attraction;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,4 +17,12 @@ public class AttractionDTO {
     Set<InfrastructureTypeDTO> infrastructures;
 
     RegionDTO region;
+
+    public static AttractionDTO createOnlyBasicFields(Attraction attraction) {
+        return AttractionDTO.builder()
+                .id(attraction.getId())
+                .name(attraction.getName())
+                .description(attraction.getDescription())
+                .build();
+    }
 }
