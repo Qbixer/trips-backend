@@ -1,12 +1,14 @@
 package com.kgp.trips.peak.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode
 public class Region {
 
     @Id
@@ -19,9 +21,11 @@ public class Region {
     @Column(length = 2000)
     String description;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
     Set<Attraction> attractions;
 
+    @EqualsAndHashCode.Exclude
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "region")
     Set<MountainRange> mountainRanges;
 }

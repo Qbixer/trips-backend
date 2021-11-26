@@ -1,12 +1,14 @@
 package com.kgp.trips.peak.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode
 public class Route {
 
     @Id
@@ -19,12 +21,14 @@ public class Route {
     @Column(length = 2000)
     String description;
 
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="route_point",
             joinColumns={@JoinColumn(name="route_id")},
             inverseJoinColumns={@JoinColumn(name="point_id")})
     Set<Point> points;
 
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="peak_route",
             joinColumns={@JoinColumn(name="route_id")},

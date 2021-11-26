@@ -3,12 +3,14 @@ package com.kgp.trips.peak.entity;
 import com.kgp.trips.peak.enums.Color;
 import com.kgp.trips.peak.enums.PointType;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@EqualsAndHashCode
 public class Point {
 
     @Id
@@ -33,6 +35,7 @@ public class Point {
     @Column(name = "point_type")
     Set<PointType> pointTypes;
 
+    @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="point_infrastructure",
             joinColumns={@JoinColumn(name="point_id")},
