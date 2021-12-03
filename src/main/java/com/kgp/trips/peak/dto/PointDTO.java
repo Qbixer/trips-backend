@@ -3,13 +3,17 @@ package com.kgp.trips.peak.dto;
 import com.kgp.trips.peak.entity.Point;
 import com.kgp.trips.peak.enums.Color;
 import com.kgp.trips.peak.enums.PointType;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PointDTO {
 
     Integer id;
