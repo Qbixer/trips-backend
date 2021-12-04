@@ -1,13 +1,17 @@
 package com.kgp.trips.peak.entity;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.kgp.trips.peak.dto.AttractionDTO;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Attraction {
 
@@ -32,4 +36,13 @@ public class Attraction {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
     Region region;
+
+    public static Attraction createFromDTO(AttractionDTO attractionDTO) {
+        return Attraction.builder()
+                .name(attractionDTO.getName())
+                .description(attractionDTO.getDescription())
+                .infrastructures(attractionDTO.getInfrastructures() != null ? attractionDTO.getInfrastructures().stream().map(infrastructureTypeDTO -> InfrastructureType.builder().name(infrastructureTypeDTO.getName()).build()).collect(Collectors.toSet()) : null)
+                .region(attractionDTO.getRegion() != null ? Region.builder().id(attractionDTO.getRegion().getId()).build() : null)
+                .build();
+    }
 }

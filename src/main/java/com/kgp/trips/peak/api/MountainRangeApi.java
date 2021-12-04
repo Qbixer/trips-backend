@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 import java.util.Set;
 
 @RequestMapping("/mountainRange")
@@ -22,11 +21,11 @@ public class MountainRangeApi {
     @GetMapping("")
     public ResponseEntity<Set<MountainRangeDTO>> getAllMountainRange() {
         Set<MountainRangeDTO> allMountainRangeDTO = mountainRangeService.getAllMountainRangeDTO();
-        return ResponseEntity.of(Optional.of(allMountainRangeDTO));
+        return ResponseEntity.ok(allMountainRangeDTO);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MountainRangeDTO> getMountainRange(@PathVariable Integer id)  {
-        return ResponseEntity.of(Optional.of(mountainRangeService.getMountainRangeDTO(id)));
+        return ResponseEntity.ok(mountainRangeService.getMountainRangeDTO(id));
     }
 }

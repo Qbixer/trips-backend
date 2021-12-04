@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Data
 @Builder
@@ -28,5 +29,12 @@ public class AttractionDTO {
                 .name(attraction.getName())
                 .description(attraction.getDescription())
                 .build();
+    }
+
+    public static AttractionDTO createAllFields(Attraction attraction) {
+        AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(attraction);
+        attractionDTO.setInfrastructures(attraction.getInfrastructures().stream().map(InfrastructureTypeDTO::createOnlyBasicFields).collect(Collectors.toSet()));
+        attractionDTO.setRegion(RegionDTO.createOnlyBasicFields(attraction.getRegion()));
+        return attractionDTO;
     }
 }

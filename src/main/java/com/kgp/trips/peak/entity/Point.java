@@ -2,14 +2,16 @@ package com.kgp.trips.peak.entity;
 
 import com.kgp.trips.peak.enums.Color;
 import com.kgp.trips.peak.enums.PointType;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 public class Point {
 

@@ -19,4 +19,9 @@ public class InfrastructureTypeDTO {
                 .name(infrastructureType.getName())
                 .build();
     }
+
+    public static InfrastructureTypeDTO createAllFields(InfrastructureType infrastructureType) {
+        InfrastructureTypeDTO infrastructureTypeDTO = createOnlyBasicFields(infrastructureType);
+        return infrastructureTypeDTO;
+    }
 }

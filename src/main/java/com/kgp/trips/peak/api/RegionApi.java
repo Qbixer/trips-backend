@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
 import java.util.Set;
 
 @RequestMapping("/region")
@@ -22,11 +21,11 @@ public class RegionApi {
     @GetMapping("")
     public ResponseEntity<Set<RegionDTO>> getAllRegion() {
         Set<RegionDTO> allRegionDTO = regionService.getAllRegionDTO();
-        return ResponseEntity.of(Optional.of(allRegionDTO));
+        return ResponseEntity.ok(allRegionDTO);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<RegionDTO> getMountainRange(@PathVariable Integer id)  {
-        return ResponseEntity.of(Optional.of(regionService.getRegionDTO(id)));
+        return ResponseEntity.ok(regionService.getRegionDTO(id));
     }
 }
