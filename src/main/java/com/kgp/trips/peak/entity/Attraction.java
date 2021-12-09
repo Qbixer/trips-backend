@@ -28,8 +28,8 @@ public class Attraction {
     @EqualsAndHashCode.Exclude
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     @JoinTable(name="attraction_infrastructure",
-            joinColumns={@JoinColumn(name="attraction_id")},
-            inverseJoinColumns={@JoinColumn(name="infrastructure_id")})
+            joinColumns={@JoinColumn(name="attraction_id", referencedColumnName = "id")},
+            inverseJoinColumns={@JoinColumn(name="infrastructure_id", referencedColumnName = "name")})
     Set<InfrastructureType> infrastructures;
 
     @EqualsAndHashCode.Exclude
@@ -39,6 +39,7 @@ public class Attraction {
 
     public static Attraction createFromDTO(AttractionDTO attractionDTO) {
         return Attraction.builder()
+                .id(attractionDTO.getId())
                 .name(attractionDTO.getName())
                 .description(attractionDTO.getDescription())
                 .infrastructures(attractionDTO.getInfrastructures() != null ? attractionDTO.getInfrastructures().stream().map(infrastructureTypeDTO -> InfrastructureType.builder().name(infrastructureTypeDTO.getName()).build()).collect(Collectors.toSet()) : null)

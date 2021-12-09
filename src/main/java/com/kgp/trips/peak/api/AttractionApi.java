@@ -22,6 +22,11 @@ public class AttractionApi {
         return ResponseEntity.ok(allInfrastructureTypeDTO);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AttractionDTO> getAttraction(@PathVariable Integer id) {
+        return ResponseEntity.ok(attractionService.getAttractionDTO(id));
+    }
+
     @PostMapping("")
     public AttractionDTO createAttraction(@RequestBody AttractionDTO attractionDTO) {
         return AttractionDTO.createAllFields(attractionService.createAttraction(attractionDTO));
@@ -37,7 +42,7 @@ public class AttractionApi {
         return ResponseEntity.ok(ResponseEntity.EMPTY);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("")
     public ResponseEntity<AttractionDTO> deleteAttraction(@RequestBody AttractionDTO attractionDTO) {
         Attraction attraction = null;
         try {

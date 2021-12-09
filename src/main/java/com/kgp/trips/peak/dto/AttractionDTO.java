@@ -34,7 +34,7 @@ public class AttractionDTO {
     public static AttractionDTO createAllFields(Attraction attraction) {
         AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(attraction);
         attractionDTO.setInfrastructures(attraction.getInfrastructures().stream().map(InfrastructureTypeDTO::createOnlyBasicFields).collect(Collectors.toSet()));
-        attractionDTO.setRegion(RegionDTO.createOnlyBasicFields(attraction.getRegion()));
+        attractionDTO.setRegion(attraction.getRegion()!= null ? RegionDTO.createOnlyBasicFields(attraction.getRegion()) : null);
         return attractionDTO;
     }
 }
