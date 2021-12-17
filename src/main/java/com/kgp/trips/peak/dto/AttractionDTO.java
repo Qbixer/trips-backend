@@ -1,6 +1,6 @@
 package com.kgp.trips.peak.dto;
 
-import com.kgp.trips.peak.entity.Attraction;
+import com.kgp.trips.peak.entity.DeprecatedAttraction;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Deprecated
 public class AttractionDTO {
 
     Integer id;
@@ -23,18 +24,18 @@ public class AttractionDTO {
 
     RegionDTO region;
 
-    public static AttractionDTO createOnlyBasicFields(Attraction attraction) {
+    public static AttractionDTO createOnlyBasicFields(DeprecatedAttraction deprecatedAttraction) {
         return AttractionDTO.builder()
-                .id(attraction.getId())
-                .name(attraction.getName())
-                .description(attraction.getDescription())
+                .id(deprecatedAttraction.getId())
+                .name(deprecatedAttraction.getName())
+                .description(deprecatedAttraction.getDescription())
                 .build();
     }
 
-    public static AttractionDTO createAllFields(Attraction attraction) {
-        AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(attraction);
-        attractionDTO.setInfrastructures(attraction.getInfrastructures().stream().map(InfrastructureTypeDTO::createOnlyBasicFields).collect(Collectors.toSet()));
-        attractionDTO.setRegion(attraction.getRegion()!= null ? RegionDTO.createOnlyBasicFields(attraction.getRegion()) : null);
+    public static AttractionDTO createAllFields(DeprecatedAttraction deprecatedAttraction) {
+        AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(deprecatedAttraction);
+        attractionDTO.setInfrastructures(deprecatedAttraction.getInfrastructures().stream().map(InfrastructureTypeDTO::createOnlyBasicFields).collect(Collectors.toSet()));
+        attractionDTO.setRegion(deprecatedAttraction.getDeprecatedRegion()!= null ? RegionDTO.createOnlyBasicFields(deprecatedAttraction.getDeprecatedRegion()) : null);
         return attractionDTO;
     }
 }

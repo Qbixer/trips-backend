@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
-@RequestMapping("/region")
+@RequestMapping("/deprecatedRegion")
 @RestController
+@Deprecated
 public class RegionApi {
 
     @Autowired

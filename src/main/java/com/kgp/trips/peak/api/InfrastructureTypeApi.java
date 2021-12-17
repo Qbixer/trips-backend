@@ -10,6 +10,7 @@ import java.util.Set;
 
 @RequestMapping("/infrastructureType")
 @RestController
+@Deprecated
 public class InfrastructureTypeApi {
 
     @Autowired

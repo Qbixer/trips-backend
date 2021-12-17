@@ -1,9 +1,10 @@
 package com.kgp.trips.peak.repository;
 
-import com.kgp.trips.peak.entity.Region;
+import com.kgp.trips.peak.entity.DeprecatedRegion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface RegionRepository extends JpaRepository<Region,Integer> {
+@Deprecated
+public interface RegionRepository extends JpaRepository<DeprecatedRegion,Integer> {
 
 
 }

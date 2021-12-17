@@ -11,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
+@Deprecated
 public class Route {
 
     @Id
@@ -35,5 +36,5 @@ public class Route {
     @JoinTable(name="peak_route",
             joinColumns={@JoinColumn(name="route_id")},
             inverseJoinColumns={@JoinColumn(name="peak_id")})
-    Set<Peak> peaks;
+    Set<DeprecatedPeak> deprecatedPeaks;
 }

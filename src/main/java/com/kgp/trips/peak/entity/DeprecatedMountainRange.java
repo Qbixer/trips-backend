@@ -11,7 +11,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class MountainRange {
+@Deprecated
+@Table(name = "mountain_range")
+public class DeprecatedMountainRange {
 
     @Id
     @GeneratedValue(generator = "mountain_range_id_seq")
@@ -24,12 +26,12 @@ public class MountainRange {
     String description;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mountainRange", cascade = {CascadeType.ALL})
-    Set<Peak> peaks;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "deprecatedMountainRange", cascade = {CascadeType.ALL})
+    Set<DeprecatedPeak> deprecatedPeaks;
 
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
-    Region region;
+    DeprecatedRegion deprecatedRegion;
 
 }

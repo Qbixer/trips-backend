@@ -11,7 +11,9 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Peak {
+@Deprecated
+@Table(name = "peak")
+public class DeprecatedPeak {
 
     @Id
     @GeneratedValue(generator = "peak_id_seq")
@@ -39,5 +41,5 @@ public class Peak {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mountain_range_id")
-    MountainRange mountainRange;
+    DeprecatedMountainRange deprecatedMountainRange;
 }

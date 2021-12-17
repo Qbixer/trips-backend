@@ -4,10 +4,10 @@ import com.kgp.trips.peak.dto.AttractionDTO;
 import com.kgp.trips.peak.dto.InfrastructureTypeDTO;
 import com.kgp.trips.peak.dto.MountainRangeDTO;
 import com.kgp.trips.peak.dto.RegionDTO;
-import com.kgp.trips.peak.entity.Attraction;
+import com.kgp.trips.peak.entity.DeprecatedAttraction;
+import com.kgp.trips.peak.entity.DeprecatedRegion;
 import com.kgp.trips.peak.entity.InfrastructureType;
-import com.kgp.trips.peak.entity.MountainRange;
-import com.kgp.trips.peak.entity.Region;
+import com.kgp.trips.peak.entity.DeprecatedMountainRange;
 import com.kgp.trips.peak.repository.RegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,17 +18,18 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Deprecated
 public class RegionService {
 
     @Autowired
     RegionRepository regionRepository;
 
     public Set<RegionDTO> getAllRegionDTO() {
-        List<Region> all = regionRepository.findAll();
+        List<DeprecatedRegion> all = regionRepository.findAll();
         Set<RegionDTO> regionDTOSet = new HashSet<>();
 
-        for(Region region: all) {
-            RegionDTO regionDTO = RegionDTO.createOnlyBasicFields(region);
+        for(DeprecatedRegion deprecatedRegion : all) {
+            RegionDTO regionDTO = RegionDTO.createOnlyBasicFields(deprecatedRegion);
             regionDTO.setMountainRanges(null);
             regionDTO.setAttractions(null);
             regionDTOSet.add(regionDTO);
@@ -37,23 +38,23 @@ public class RegionService {
     }
 
     public RegionDTO getRegionDTO(Integer id) {
-        Optional<Region> optionalRegionDTO = regionRepository.findById(id);
+        Optional<DeprecatedRegion> optionalRegionDTO = regionRepository.findById(id);
         if(optionalRegionDTO.isPresent()) {
-            Region region = optionalRegionDTO.get();
-            RegionDTO regionDTO = RegionDTO.createOnlyBasicFields(region);
+            DeprecatedRegion deprecatedRegion = optionalRegionDTO.get();
+            RegionDTO regionDTO = RegionDTO.createOnlyBasicFields(deprecatedRegion);
             Set<MountainRangeDTO> mountainRangeDTOSet = new HashSet<>();
 
-            for(MountainRange mountainRange: region.getMountainRanges()) {
-                MountainRangeDTO mountainRangeDTO = MountainRangeDTO.createOnlyBasicFields(mountainRange);
+            for(DeprecatedMountainRange deprecatedMountainRange : deprecatedRegion.getDeprecatedMountainRanges()) {
+                MountainRangeDTO mountainRangeDTO = MountainRangeDTO.createOnlyBasicFields(deprecatedMountainRange);
                 mountainRangeDTOSet.add(mountainRangeDTO);
             }
             regionDTO.setMountainRanges(mountainRangeDTOSet);
 
             Set<AttractionDTO> attractionDTOSet = new HashSet<>();
-            for(Attraction attraction: region.getAttractions()) {
-                AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(attraction);
+            for(DeprecatedAttraction deprecatedAttraction : deprecatedRegion.getDeprecatedAttractions()) {
+                AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(deprecatedAttraction);
                 Set<InfrastructureTypeDTO> infrastructureTypeDTOSet = new HashSet<>();
-                for(InfrastructureType infrastructureType: attraction.getInfrastructures()) {
+                for(InfrastructureType infrastructureType: deprecatedAttraction.getInfrastructures()) {
                     InfrastructureTypeDTO infrastructureTypeDTO = InfrastructureTypeDTO.createOnlyBasicFields(infrastructureType);
                     infrastructureTypeDTOSet.add(infrastructureTypeDTO);
                 }

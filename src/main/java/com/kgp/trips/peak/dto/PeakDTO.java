@@ -1,6 +1,6 @@
 package com.kgp.trips.peak.dto;
 
-import com.kgp.trips.peak.entity.Peak;
+import com.kgp.trips.peak.entity.DeprecatedPeak;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,6 +12,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Deprecated
 public class PeakDTO {
 
     Integer id;
@@ -24,13 +25,13 @@ public class PeakDTO {
 
     MountainRangeDTO mountainRange;
 
-    public static PeakDTO createOnlyBasicFields(Peak peak) {
+    public static PeakDTO createOnlyBasicFields(DeprecatedPeak deprecatedPeak) {
         return PeakDTO.builder()
-                .id(peak.getId())
-                .name(peak.getName())
-                .description(peak.getDescription())
-                .height(peak.getHeight())
-                .stamp(peak.getStamp())
+                .id(deprecatedPeak.getId())
+                .name(deprecatedPeak.getName())
+                .description(deprecatedPeak.getDescription())
+                .height(deprecatedPeak.getHeight())
+                .stamp(deprecatedPeak.getStamp())
                 .build();
     }
 }

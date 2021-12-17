@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Deprecated
 public class InfrastructureTypeService {
 
     public class InfrastructureTypeNotFoundException extends Exception {

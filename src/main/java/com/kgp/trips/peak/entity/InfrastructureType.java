@@ -14,6 +14,7 @@ import javax.persistence.Id;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Deprecated
 public class InfrastructureType {
 
     @Id

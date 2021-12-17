@@ -1,9 +1,10 @@
 package com.kgp.trips.peak.repository;
 
-import com.kgp.trips.peak.entity.Attraction;
+import com.kgp.trips.peak.entity.DeprecatedAttraction;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface AttractionRepository extends JpaRepository<Attraction,Integer> {
+@Deprecated
+public interface AttractionRepository extends JpaRepository<DeprecatedAttraction,Integer> {
 
 }

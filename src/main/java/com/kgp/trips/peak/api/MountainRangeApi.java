@@ -13,6 +13,7 @@ import java.util.Set;
 
 @RequestMapping("/mountainRange")
 @RestController
+@Deprecated
 public class MountainRangeApi {
 
     @Autowired

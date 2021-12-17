@@ -13,7 +13,9 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class Attraction {
+@Deprecated
+@Table(name = "attraction")
+public class DeprecatedAttraction {
 
     @Id
     @GeneratedValue(generator = "attraction_id_seq")
@@ -35,15 +37,15 @@ public class Attraction {
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "region_id")
-    Region region;
+    DeprecatedRegion deprecatedRegion;
 
-    public static Attraction createFromDTO(AttractionDTO attractionDTO) {
-        return Attraction.builder()
+    public static DeprecatedAttraction createFromDTO(AttractionDTO attractionDTO) {
+        return DeprecatedAttraction.builder()
                 .id(attractionDTO.getId())
                 .name(attractionDTO.getName())
                 .description(attractionDTO.getDescription())
                 .infrastructures(attractionDTO.getInfrastructures() != null ? attractionDTO.getInfrastructures().stream().map(infrastructureTypeDTO -> InfrastructureType.builder().name(infrastructureTypeDTO.getName()).build()).collect(Collectors.toSet()) : null)
-                .region(attractionDTO.getRegion() != null ? Region.builder().id(attractionDTO.getRegion().getId()).build() : null)
+                .deprecatedRegion(attractionDTO.getRegion() != null ? DeprecatedRegion.builder().id(attractionDTO.getRegion().getId()).build() : null)
                 .build();
     }
 }

@@ -1,7 +1,7 @@
 package com.kgp.trips.peak.api;
 
 import com.kgp.trips.peak.dto.AttractionDTO;
-import com.kgp.trips.peak.entity.Attraction;
+import com.kgp.trips.peak.entity.DeprecatedAttraction;
 import com.kgp.trips.peak.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,7 @@ import java.util.Set;
 
 @RequestMapping("/attraction")
 @RestController
+@Deprecated
 public class AttractionApi {
 
     @Autowired
@@ -44,12 +45,12 @@ public class AttractionApi {
 
     @PutMapping("")
     public ResponseEntity<AttractionDTO> deleteAttraction(@RequestBody AttractionDTO attractionDTO) {
-        Attraction attraction = null;
+        DeprecatedAttraction deprecatedAttraction = null;
         try {
-            attraction = attractionService.updateAttraction(attractionDTO);
+            deprecatedAttraction = attractionService.updateAttraction(attractionDTO);
         } catch (AttractionService.AttractionNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(AttractionDTO.createAllFields(attraction));
+        return ResponseEntity.ok(AttractionDTO.createAllFields(deprecatedAttraction));
     }
 }
