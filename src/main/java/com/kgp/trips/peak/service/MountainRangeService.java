@@ -7,7 +7,7 @@ import com.kgp.trips.peak.dto.RouteDTO;
 import com.kgp.trips.peak.entity.DeprecatedMountainRange;
 import com.kgp.trips.peak.entity.DeprecatedPeak;
 import com.kgp.trips.peak.entity.Route;
-import com.kgp.trips.peak.repository.MountainRangeRepository;
+import com.kgp.trips.peak.repository.DeprecatedMountainRangeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +21,10 @@ import java.util.Set;
 public class MountainRangeService {
 
     @Autowired
-    MountainRangeRepository mountainRangeRepository;
+    DeprecatedMountainRangeRepository deprecatedMountainRangeRepository;
 
     public Set<MountainRangeDTO> getAllMountainRangeDTO() {
-        List<DeprecatedMountainRange> all = mountainRangeRepository.findAll();
+        List<DeprecatedMountainRange> all = deprecatedMountainRangeRepository.findAll();
         Set<MountainRangeDTO> result = new HashSet<>();
         for(DeprecatedMountainRange deprecatedMountainRange : all) {
             Set<PeakDTO> peaks = new HashSet<>();
@@ -44,7 +44,7 @@ public class MountainRangeService {
     }
 
     public MountainRangeDTO getMountainRangeDTO(Integer id) {
-        Optional<DeprecatedMountainRange> optionalMountainRange = mountainRangeRepository.findById(id);
+        Optional<DeprecatedMountainRange> optionalMountainRange = deprecatedMountainRangeRepository.findById(id);
         if(optionalMountainRange.isPresent()) {
             DeprecatedMountainRange deprecatedMountainRange = optionalMountainRange.get();
             Set<PeakDTO> peakDTOSet = new HashSet<>();

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
 
-@RequestMapping("/infrastructureType")
+@RequestMapping("/deprecated/infrastructureType")
 @RestController
 @Deprecated
 public class InfrastructureTypeApi {

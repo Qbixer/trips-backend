@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Deprecated
-public interface MountainRangeRepository extends JpaRepository<DeprecatedMountainRange,Integer> {
+public interface DeprecatedMountainRangeRepository extends JpaRepository<DeprecatedMountainRange,Integer> {
 
 }

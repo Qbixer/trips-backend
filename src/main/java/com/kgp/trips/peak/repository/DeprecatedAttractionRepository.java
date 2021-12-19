@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 
 @Deprecated
-public interface AttractionRepository extends JpaRepository<DeprecatedAttraction,Integer> {
+public interface DeprecatedAttractionRepository extends JpaRepository<DeprecatedAttraction,Integer> {
 
 }

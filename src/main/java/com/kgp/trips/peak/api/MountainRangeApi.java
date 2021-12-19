@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Set;
 
-@RequestMapping("/mountainRange")
+@RequestMapping("/deprecated/mountainRange")
 @RestController
 @Deprecated
 public class MountainRangeApi {

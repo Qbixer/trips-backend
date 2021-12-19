@@ -8,7 +8,7 @@ import com.kgp.trips.peak.entity.DeprecatedAttraction;
 import com.kgp.trips.peak.entity.DeprecatedRegion;
 import com.kgp.trips.peak.entity.InfrastructureType;
 import com.kgp.trips.peak.entity.DeprecatedMountainRange;
-import com.kgp.trips.peak.repository.RegionRepository;
+import com.kgp.trips.peak.repository.DeprecatedRegionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,10 +22,10 @@ import java.util.Set;
 public class RegionService {
 
     @Autowired
-    RegionRepository regionRepository;
+    DeprecatedRegionRepository deprecatedRegionRepository;
 
     public Set<RegionDTO> getAllRegionDTO() {
-        List<DeprecatedRegion> all = regionRepository.findAll();
+        List<DeprecatedRegion> all = deprecatedRegionRepository.findAll();
         Set<RegionDTO> regionDTOSet = new HashSet<>();
 
         for(DeprecatedRegion deprecatedRegion : all) {
@@ -38,7 +38,7 @@ public class RegionService {
     }
 
     public RegionDTO getRegionDTO(Integer id) {
-        Optional<DeprecatedRegion> optionalRegionDTO = regionRepository.findById(id);
+        Optional<DeprecatedRegion> optionalRegionDTO = deprecatedRegionRepository.findById(id);
         if(optionalRegionDTO.isPresent()) {
             DeprecatedRegion deprecatedRegion = optionalRegionDTO.get();
             RegionDTO regionDTO = RegionDTO.createOnlyBasicFields(deprecatedRegion);

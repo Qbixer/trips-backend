@@ -32,7 +32,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
         http
                 .authorizeRequests()
                         .antMatchers("/login", "/register").permitAll()
-                        .antMatchers(HttpMethod.GET).hasAuthority(UserRole.USER.toString())
+                        .antMatchers(HttpMethod.GET).permitAll()
                         .anyRequest().hasAuthority(UserRole.ADMIN.toString())
                 .and()
                 .exceptionHandling(e -> e
@@ -40,7 +40,7 @@ public class WebConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
                 )
                 .logout().disable()
                 .csrf().disable()
-                .cors().disable();
+                .cors();
 //                .oauth2Login();
     }
     @Override
