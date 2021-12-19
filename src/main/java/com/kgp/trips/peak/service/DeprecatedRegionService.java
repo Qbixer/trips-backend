@@ -19,7 +19,7 @@ import java.util.Set;
 
 @Service
 @Deprecated
-public class RegionService {
+public class DeprecatedRegionService {
 
     @Autowired
     DeprecatedRegionRepository deprecatedRegionRepository;

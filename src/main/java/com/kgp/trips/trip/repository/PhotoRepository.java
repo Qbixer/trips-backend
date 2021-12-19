@@ -1,6 +1,5 @@
 package com.kgp.trips.trip.repository;
 
-import com.kgp.trips.trip.entity.Peak;
 import com.kgp.trips.trip.entity.Photo;
 import org.springframework.data.jpa.repository.JpaRepository;
 

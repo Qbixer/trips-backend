@@ -1,6 +1,5 @@
 package com.kgp.trips.trip.dto;
 
-import com.kgp.trips.trip.entity.Attraction;
 import com.kgp.trips.trip.entity.MountainRange;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

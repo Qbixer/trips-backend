@@ -1,10 +1,6 @@
 package com.kgp.trips.trip.api;
 
-import com.kgp.trips.peak.entity.DeprecatedAttraction;
-import com.kgp.trips.peak.service.DeprecatedAttractionService;
 import com.kgp.trips.trip.dto.AttractionDTO;
-import com.kgp.trips.trip.dto.RegionDTO;
-import com.kgp.trips.trip.entity.Attraction;
 import com.kgp.trips.trip.service.AttractionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +28,7 @@ public class AttractionApi {
 
     @PostMapping("")
     public AttractionDTO createAttraction(@RequestBody AttractionDTO attractionDTO) {
-        Attraction attraction = attractionService.createAttraction(attractionDTO);
-        AttractionDTO result = AttractionDTO.createOnlyBasicFields(attraction);
-        if(attraction.getRegion() != null) {
-            result.setRegion(RegionDTO.createOnlyBasicFields(attraction.getRegion()));
-        }
-        return result;
+        return attractionService.createAttraction(attractionDTO);
     }
 
     @DeleteMapping("/{id}")
@@ -51,17 +42,11 @@ public class AttractionApi {
     }
 
     @PutMapping("")
-    public ResponseEntity<AttractionDTO> deleteAttraction(@RequestBody AttractionDTO attractionDTO) {
-        Attraction attraction = null;
+    public ResponseEntity<AttractionDTO> updateAttraction(@RequestBody AttractionDTO attractionDTO) {
         try {
-            attraction = attractionService.updateAttraction(attractionDTO);
+            return ResponseEntity.ok(attractionService.updateAttraction(attractionDTO));
         } catch (AttractionService.AttractionNotFoundException e) {
             return ResponseEntity.notFound().build();
         }
-        AttractionDTO result = AttractionDTO.createOnlyBasicFields(attraction);
-        if(attraction.getRegion() != null) {
-            result.setRegion(RegionDTO.createOnlyBasicFields(attraction.getRegion()));
-        }
-        return ResponseEntity.ok(result);
     }
 }
