@@ -88,6 +88,7 @@ public class AttractionService {
         if(attractionDTO.getRegion() != null) {
             Region region = new Region();
             region.setId(attractionDTO.getRegion().getId());
+            attraction.setRegion(region);
         }
         return attraction;
     }
