@@ -18,6 +18,7 @@ public class PeakDTO {
     String name;
     String description;
     Integer height;
+    Boolean isKGP;
 
     MountainRangeDTO mountainRange;
     Set<TripDTO> trips;
@@ -28,6 +29,7 @@ public class PeakDTO {
                 .name(peak.getName())
                 .description(peak.getDescription())
                 .height(peak.getHeight())
+                .isKGP(peak.getIsKGP())
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.kgp.trips.trip.entity;
 
+import com.kgp.trips.trip.dto.AttractionDTO;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,5 +29,17 @@ public class Attraction {
     @JoinColumn(name = "region_id")
     Region region;
 
-
+    public static Attraction createAttractionFromAttractionDTO(AttractionDTO attractionDTO) {
+        Attraction attraction = Attraction.builder()
+                .id(attractionDTO.getId())
+                .name(attractionDTO.getName())
+                .description(attractionDTO.getDescription())
+                .build();
+        if(attractionDTO.getRegion() != null) {
+            Region region = new Region();
+            region.setId(attractionDTO.getRegion().getId());
+            attraction.setRegion(region);
+        }
+        return attraction;
+    }
 }

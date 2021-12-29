@@ -1,9 +1,7 @@
 package com.kgp.trips.trip.service;
 
 import com.kgp.trips.trip.dto.AttractionDTO;
-import com.kgp.trips.trip.dto.RegionDTO;
 import com.kgp.trips.trip.entity.Attraction;
-import com.kgp.trips.trip.entity.Region;
 import com.kgp.trips.trip.repository.AttractionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,7 +28,7 @@ public class AttractionService {
         Set<AttractionDTO> attractionDTOSet = new HashSet<>();
 
         for(Attraction attraction : all) {
-            AttractionDTO attractionDTO = createAttractionDTOFromAttraction(attraction);
+            AttractionDTO attractionDTO = AttractionDTO.createAttractionDTOFromAttraction(attraction);
             attractionDTOSet.add(attractionDTO);
         }
         return attractionDTOSet;
@@ -40,7 +38,7 @@ public class AttractionService {
         Optional<Attraction> optionalAttraction = attractionRepository.findById(id);
         if(optionalAttraction.isPresent()) {
             Attraction attraction = optionalAttraction.get();
-            return createAttractionDTOFromAttraction(attraction);
+            return AttractionDTO.createAttractionDTOFromAttraction(attraction);
         } else {
             return null;
         }
@@ -48,9 +46,9 @@ public class AttractionService {
 
 
     public AttractionDTO createAttraction(AttractionDTO attractionDTO) {
-        Attraction attraction = createAttractionFromAttractionDTO(attractionDTO);
+        Attraction attraction = Attraction.createAttractionFromAttractionDTO(attractionDTO);
         Attraction save = attractionRepository.save(attraction);
-        return createAttractionDTOFromAttraction(save);
+        return AttractionDTO.createAttractionDTOFromAttraction(save);
     }
 
     public void deleteAttraction(Integer id) throws AttractionNotFoundException {
@@ -67,29 +65,7 @@ public class AttractionService {
         if(optionalAttraction.isEmpty()) {
             throw new AttractionNotFoundException();
         }
-        Attraction attraction = createAttractionFromAttractionDTO(attractionDTO);
-        return createAttractionDTOFromAttraction(attractionRepository.save(attraction));
-    }
-
-    private AttractionDTO createAttractionDTOFromAttraction(Attraction attraction) {
-        AttractionDTO attractionDTO = AttractionDTO.createOnlyBasicFields(attraction);
-        if(attraction.getRegion() != null) {
-            attractionDTO.setRegion(RegionDTO.createOnlyBasicFields(attraction.getRegion()));
-        }
-        return attractionDTO;
-    }
-
-    private Attraction createAttractionFromAttractionDTO(AttractionDTO attractionDTO) {
-        Attraction attraction = Attraction.builder()
-                .id(attractionDTO.getId())
-                .name(attractionDTO.getName())
-                .description(attractionDTO.getDescription())
-                .build();
-        if(attractionDTO.getRegion() != null) {
-            Region region = new Region();
-            region.setId(attractionDTO.getRegion().getId());
-            attraction.setRegion(region);
-        }
-        return attraction;
+        Attraction attraction = Attraction.createAttractionFromAttractionDTO(attractionDTO);
+        return AttractionDTO.createAttractionDTOFromAttraction(attractionRepository.save(attraction));
     }
 }

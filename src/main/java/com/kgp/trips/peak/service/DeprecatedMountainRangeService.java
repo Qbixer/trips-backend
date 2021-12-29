@@ -18,7 +18,7 @@ import java.util.Set;
 
 @Service
 @Deprecated
-public class MountainRangeService {
+public class DeprecatedMountainRangeService {
 
     @Autowired
     DeprecatedMountainRangeRepository deprecatedMountainRangeRepository;

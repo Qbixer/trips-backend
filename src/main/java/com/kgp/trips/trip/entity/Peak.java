@@ -27,6 +27,9 @@ public class Peak {
     @Column
     Integer height;
 
+    @Column(name = "is_kgp")
+    Boolean isKGP;
+
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mountain_range_id")

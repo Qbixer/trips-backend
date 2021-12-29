@@ -1,7 +1,7 @@
 package com.kgp.trips.peak.api;
 
 import com.kgp.trips.peak.dto.MountainRangeDTO;
-import com.kgp.trips.peak.service.MountainRangeService;
+import com.kgp.trips.peak.service.DeprecatedMountainRangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,19 +14,19 @@ import java.util.Set;
 @RequestMapping("/deprecated/mountainRange")
 @RestController
 @Deprecated
-public class MountainRangeApi {
+public class DeprecatedMountainRangeApi {
 
     @Autowired
-    MountainRangeService mountainRangeService;
+    DeprecatedMountainRangeService deprecatedMountainRangeService;
 
     @GetMapping("")
     public ResponseEntity<Set<MountainRangeDTO>> getAllMountainRange() {
-        Set<MountainRangeDTO> allMountainRangeDTO = mountainRangeService.getAllMountainRangeDTO();
+        Set<MountainRangeDTO> allMountainRangeDTO = deprecatedMountainRangeService.getAllMountainRangeDTO();
         return ResponseEntity.ok(allMountainRangeDTO);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<MountainRangeDTO> getMountainRange(@PathVariable Integer id)  {
-        return ResponseEntity.ok(mountainRangeService.getMountainRangeDTO(id));
+        return ResponseEntity.ok(deprecatedMountainRangeService.getMountainRangeDTO(id));
     }
 }
