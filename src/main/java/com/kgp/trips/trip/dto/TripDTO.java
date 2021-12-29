@@ -1,12 +1,13 @@
 package com.kgp.trips.trip.dto;
 
-import com.kgp.trips.trip.entity.Trip;
+import com.kgp.trips.trip.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -34,5 +35,33 @@ public class TripDTO {
                 .date(trip.getDate())
                 .mapaTurystycznaLink(trip.getMapaTurystycznaLink())
                 .build();
+    }
+
+    public static TripDTO createTripDTOFromTrip(Trip trip) {
+        TripDTO tripDTO = TripDTO.createOnlyBasicFields(trip);
+
+        if(trip.getRegion() != null) {
+            tripDTO.setRegion(RegionDTO.createOnlyBasicFields(trip.getRegion()));
+        }
+
+        Set<MountainRangeDTO> mountainRangeDTOSet = new HashSet<>();
+        if(trip.getMountainRanges() != null) {
+            for(MountainRange mountainRange : trip.getMountainRanges()) {
+                MountainRangeDTO mountainRangeDTO = MountainRangeDTO.createOnlyBasicFields(mountainRange);
+                mountainRangeDTOSet.add(mountainRangeDTO);
+            }
+        }
+        tripDTO.setMountainRanges(mountainRangeDTOSet);
+
+        Set<PeakDTO> peakDTOSet = new HashSet<>();
+        if(trip.getPeaks() != null) {
+            for (Peak peak : trip.getPeaks()) {
+                PeakDTO peakDTO = PeakDTO.createOnlyBasicFields(peak);
+                peakDTOSet.add(peakDTO);
+            }
+        }
+        tripDTO.setPeaks(peakDTOSet);
+
+        return tripDTO;
     }
 }
