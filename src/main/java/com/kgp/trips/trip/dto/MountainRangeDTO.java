@@ -24,6 +24,7 @@ public class MountainRangeDTO {
     RegionDTO region;
     Set<PeakDTO> peaks;
     Set<TripDTO> trips;
+    PhotoDTO photo;
 
     public static MountainRangeDTO createOnlyBasicFields(MountainRange mountainRange) {
         return MountainRangeDTO.builder()
@@ -37,12 +38,12 @@ public class MountainRangeDTO {
     public static MountainRangeDTO createMountainRangeDTOFromMountainRange(MountainRange mountainRange) {
         MountainRangeDTO mountainRangeDTO = MountainRangeDTO.createOnlyBasicFields(mountainRange);
 
-        if(mountainRange.getRegion() != null) {
+        if (mountainRange.getRegion() != null) {
             mountainRangeDTO.setRegion(RegionDTO.createOnlyBasicFields(mountainRange.getRegion()));
         }
 
         Set<PeakDTO> peakDTOSet = new HashSet<>();
-        if(mountainRange.getPeaks() != null) {
+        if (mountainRange.getPeaks() != null) {
             for (Peak peak : mountainRange.getPeaks()) {
                 PeakDTO peakDTO = PeakDTO.createOnlyBasicFields(peak);
                 peakDTOSet.add(peakDTO);
@@ -51,14 +52,18 @@ public class MountainRangeDTO {
         mountainRangeDTO.setPeaks(peakDTOSet);
 
         Set<TripDTO> tripDTOSet = new HashSet<>();
-        if(mountainRange.getTrips() != null) {
+        if (mountainRange.getTrips() != null) {
             for(Trip trip : mountainRange.getTrips()) {
                 TripDTO tripDTO = TripDTO.createOnlyBasicFields(trip);
                 tripDTOSet.add(tripDTO);
             }
         }
         mountainRangeDTO.setTrips(tripDTOSet);
+
+        if (mountainRange.getPhoto() != null) {
+            mountainRangeDTO.setPhoto(PhotoDTO.createPhotoDTOFromPhoto(mountainRange.getPhoto()));
+        }
+
         return mountainRangeDTO;
     }
-
 }

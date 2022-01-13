@@ -18,7 +18,7 @@ import java.util.Set;
 public class Peak {
 
     @Id
-    @GeneratedValue(generator = "peak_id_seq")
+    @GeneratedValue(generator = "trip.peak_id_seq")
     Integer id;
 
     @Column(unique = true)

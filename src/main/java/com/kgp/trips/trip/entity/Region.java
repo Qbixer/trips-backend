@@ -20,7 +20,7 @@ import java.util.Set;
 public class Region {
 
     @Id
-    @GeneratedValue(generator = "region_id_seq")
+    @GeneratedValue(generator = "trip.region_id_seq")
     Integer id;
 
     @Column(unique = true)

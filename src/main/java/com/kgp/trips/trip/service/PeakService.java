@@ -1,8 +1,11 @@
 package com.kgp.trips.trip.service;
 
 import com.kgp.trips.trip.dto.PeakDTO;
+import com.kgp.trips.trip.dto.TripDTO;
 import com.kgp.trips.trip.entity.Peak;
+import com.kgp.trips.trip.entity.Trip;
 import com.kgp.trips.trip.repository.PeakRepository;
+import com.kgp.trips.trip.repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +23,9 @@ public class PeakService {
     
     @Autowired
     PeakRepository peakRepository;
+
+    @Autowired
+    TripRepository tripRepository;
 
     public Set<PeakDTO> getAllPeakDTO() {
         List<Peak> all = peakRepository.findAll();
@@ -61,7 +67,16 @@ public class PeakService {
         if(optionalPeak.isEmpty()) {
             throw new PeakService.PeakNotFoundException();
         }
+
         Peak peak = Peak.createPeakFromPeakDTO(peakDTO);
+        if(peakDTO.getTrips() != null) {
+            Set<Trip> trips = new HashSet<>();
+            for (TripDTO tripDTO : peakDTO.getTrips()) {
+                Trip trip = tripRepository.getById(tripDTO.getId());
+                trips.add(trip);
+            }
+            peak.setTrips(trips);
+        }
         return PeakDTO.createPeakDTOFromPeak(peakRepository.save(peak));
     }
 }

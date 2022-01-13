@@ -2,6 +2,7 @@ package com.kgp.trips.trip.entity;
 
 import com.kgp.trips.trip.dto.MountainRangeDTO;
 import com.kgp.trips.trip.dto.PeakDTO;
+import com.kgp.trips.trip.dto.PhotoDTO;
 import com.kgp.trips.trip.dto.TripDTO;
 import lombok.*;
 
@@ -19,7 +20,7 @@ import java.util.Set;
 public class MountainRange {
 
     @Id
-    @GeneratedValue(generator = "mountain_range_id_seq")
+    @GeneratedValue(generator = "trip.mountain_range_id_seq")
     Integer id;
 
     @Column(unique = true)
@@ -34,17 +35,22 @@ public class MountainRange {
     Region region;
 
     @EqualsAndHashCode.Exclude
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mountainRange")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "mountainRange", cascade = {CascadeType.MERGE})
     Set<Peak> peaks;
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             schema = "trip",
             name="trip_mountain_range",
             joinColumns={@JoinColumn(name="mountain_range_id")},
             inverseJoinColumns={@JoinColumn(name="trip_id")})
     Set<Trip> trips;
+
+    @EqualsAndHashCode.Exclude
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "photo_id")
+    Photo photo;
 
     public static MountainRange createMountainRangeFromMountainRangeDTO(MountainRangeDTO mountainRangeDTO) {
         MountainRange mountainRange = MountainRange.builder()
@@ -77,6 +83,12 @@ public class MountainRange {
                 trips.add(trip);
             }
             mountainRange.setTrips(trips);
+        }
+
+        if(mountainRangeDTO.getPhoto() != null) {
+            Photo photo = new Photo();
+            photo.setId(mountainRangeDTO.getPhoto().getId());
+            mountainRange.setPhoto(photo);
         }
 
         return mountainRange;

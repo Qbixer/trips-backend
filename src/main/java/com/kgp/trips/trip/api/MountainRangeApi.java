@@ -21,6 +21,12 @@ public class MountainRangeApi {
         return ResponseEntity.ok(allMountainRangeDTO);
     }
 
+    @GetMapping("/list")
+    public ResponseEntity<Set<MountainRangeDTO>> getAllMountainRangeWithoutPhoto() {
+        Set<MountainRangeDTO> allMountainRangeDTO = mountainRangeService.getAllMountainRangeDTOOnlyBasicFields();
+        return ResponseEntity.ok(allMountainRangeDTO);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<MountainRangeDTO> getMountainRange(@PathVariable Integer id)  {
         return ResponseEntity.ok(mountainRangeService.getMountainRangeDTO(id));

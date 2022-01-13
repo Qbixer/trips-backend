@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Attraction {
 
     @Id
-    @GeneratedValue(generator = "attraction_id_seq")
+    @GeneratedValue(generator = "trip.attraction_id_seq")
     Integer id;
 
     @Column(unique = true)

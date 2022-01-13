@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Photo {
 
     @Id
-    @GeneratedValue(generator = "photo_id_seq")
+    @GeneratedValue(generator = "trip.photo_id_seq")
     Integer id;
 
     @Column
@@ -25,5 +25,6 @@ public class Photo {
     @JsonIgnore
     @Lob
     @Type(type = "org.hibernate.type.BinaryType")
+    @Basic(fetch = FetchType.LAZY)
     byte[] photo;
 }

@@ -2,6 +2,7 @@ package com.kgp.trips.trip.entity;
 
 import com.kgp.trips.trip.dto.MountainRangeDTO;
 import com.kgp.trips.trip.dto.PeakDTO;
+import com.kgp.trips.trip.dto.PhotoDTO;
 import com.kgp.trips.trip.dto.TripDTO;
 import lombok.*;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 public class Trip {
 
     @Id
-    @GeneratedValue(generator = "trip_id_seq")
+    @GeneratedValue(generator = "trip.trip_id_seq")
     Integer id;
 
     @Column(unique = true)
@@ -41,7 +42,7 @@ public class Trip {
     Region region;
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             schema = "trip",
             name="trip_photo",
@@ -50,7 +51,7 @@ public class Trip {
     Set<Photo> photos;
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             schema = "trip",
             name="trip_peak",
@@ -59,7 +60,7 @@ public class Trip {
     Set<Peak> peaks;
 
     @EqualsAndHashCode.Exclude
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE})
     @JoinTable(
             schema = "trip",
             name="trip_mountain_range",
@@ -83,7 +84,7 @@ public class Trip {
             trip.setRegion(region);
         }
 
-        if(trip.getPeaks() != null) {
+        if(tripDTO.getPeaks() != null) {
             Set<Peak> peaks = new HashSet<>();
             for(PeakDTO peakDTO : tripDTO.getPeaks()) {
                 Peak peak = new Peak();
@@ -103,6 +104,15 @@ public class Trip {
             trip.setMountainRanges(mountainRanges);
         }
 
+        if(tripDTO.getPhotos() != null) {
+            Set<Photo> photos =  new HashSet<>();
+            for(PhotoDTO photoDTO : tripDTO.getPhotos()) {
+                Photo photo = new Photo();
+                photo.setId(photoDTO.getId());
+                photos.add(photo);
+            }
+            trip.setPhotos(photos);
+        }
 
 
         return trip;

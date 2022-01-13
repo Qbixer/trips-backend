@@ -1,5 +1,6 @@
 package com.kgp.trips.trip.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.kgp.trips.trip.entity.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,14 +20,15 @@ public class TripDTO {
     Integer id;
     String name;
     String description;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     LocalDateTime date;
     String mapaTurystycznaLink;
 
     RegionDTO region;
     Set<MountainRangeDTO> mountainRanges;
     Set<PeakDTO> peaks;
+    Set<PhotoDTO> photos;
 
-    //TODO photos
     public static TripDTO createOnlyBasicFields(Trip trip) {
         return TripDTO.builder()
                 .id(trip.getId())
